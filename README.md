@@ -29,7 +29,7 @@ Generate QR codes instantly using this minimal web app built with **HTML**, **Ta
 - Tailwind CSS  
 - JavaScript  
 - GoQR API
-- 
+  
 ---
 
 ## 📄 License
