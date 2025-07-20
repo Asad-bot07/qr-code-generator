@@ -33,4 +33,4 @@ Generate QR codes instantly using this minimal web app built with **HTML**, **Ta
 ---
 
 ## 📄 License
-[MIT License](license) — free to use, modify, and share.
+[MIT License](LICENSE) — free to use, modify, and share.
