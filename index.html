@@ -1,46 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Qr Generator</title>
-    <link rel="stylesheet" href="/output.css" />
-  </head>
-  <body class="bg-gray-600 flex justify-center items-center min-h-screen">
-    <div>
-      <input
-        type="text"
-        id="input"
-        placeholder="Enter something..."
-        class="bg-white p-2.5 rounded-md"
-      />
-      <button class="bg-blue-400 p-2.5 rounded-md hover:bg-blue-600" id="bttn">Generate</button>
-      <div class="mt-4 bg-white p-4 rounded shadow hidden" id="imgDiv">
-        <img src="" id="qr" alt="QR Code" class="mx-auto" />
-      </div>
-      <div id="Nothing" class="mt-4 bg-white p-4 rounded shadow">
-        Nothing to Display🔍
-      </div>
-    </div>
-    <script>
-      const img = document.getElementById("qr");
-      const GenBttn = document.getElementById("bttn")
-      GenBttn.addEventListener('click',()=>{
-        const data = document.getElementById("input");
-        const div = document.getElementById("imgDiv");
-        const Nothdiv = document.getElementById("Nothing");
-        const input = data.value;
-        if(input === ""){
-            alert("Write smth bruh")
-        }else{
-            setTimeout(() => {
-                div.classList.remove('hidden')
-                Nothdiv.classList.add("hidden")
-                const Url = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${input}`;
-                img.src = `${Url}`;
-            }, 1000);
+    <title>QR Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-color: #4b5563; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-      })
+
+        .container {
+            text-align: center;
+        }
+        #input {
+            background-color: white;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+        #bttn {
+            background-color: #60a5fa; 
+            padding: 10px 15px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #bttn:hover {
+            background-color: #2563eb; 
+        }
+
+        .card {
+            margin-top: 16px;
+            background-color: white;
+            padding: 16px;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #qr {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input
+            type="text"
+            id="input"
+            placeholder="Enter something..."
+        />
+        <button id="bttn">Generate</button>
+
+        <div class="card hidden" id="imgDiv">
+            <img src="" id="qr" alt="QR Code" />
+        </div>
+
+        <div id="Nothing" class="card">
+            Nothing to Display 🔍
+        </div>
+    </div>
+
+    <script>
+        const img = document.getElementById("qr");
+        const GenBttn = document.getElementById("bttn");
+        
+        GenBttn.addEventListener('click', () => {
+            const data = document.getElementById("input");
+            const div = document.getElementById("imgDiv");
+            const Nothdiv = document.getElementById("Nothing");
+            const input = data.value.trim();
+
+            if (input === "") {
+                alert("Write smth bruh");
+            } else {
+                img.src = ""; 
+                
+                setTimeout(() => {
+                    div.classList.remove('hidden');
+                    Nothdiv.classList.add("hidden");
+                    const Url = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(input)}`;
+                    img.src = Url;
+                }, 500); 
+            }
+        });
     </script>
-  </body>
+</body>
 </html>
